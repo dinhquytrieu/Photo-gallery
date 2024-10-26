@@ -2,18 +2,24 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchPhotoById } from "../api/unsplash";
+import { Photo } from "../types/Photo"; // Import kiểu Photo
 
 const PhotoDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const [photo, setPhoto] = useState<any>(null);
+  const [photo, setPhoto] = useState<Photo | null>(null); // Sử dụng kiểu Photo
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const loadPhoto = async () => {
       setLoading(true);
-      const photoData = await fetchPhotoById(id!);
-      setPhoto(photoData);
-      setLoading(false);
+      try {
+        const photoData: Photo = await fetchPhotoById(id!); // Fetch dữ liệu với kiểu Photo
+        setPhoto(photoData);
+      } catch (error) {
+        console.error("Failed to fetch photo:", error);
+      } finally {
+        setLoading(false);
+      }
     };
     loadPhoto();
   }, [id]);

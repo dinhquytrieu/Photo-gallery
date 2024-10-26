@@ -2,20 +2,37 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { fetchPhotos } from "../api/unsplash";
+import { Photo } from "../types/Photo"; // Import kiểu dữ liệu Photo
 
 const PhotoList: React.FC = () => {
-  const [photos, setPhotos] = useState<any[]>([]);
+  const [photos, setPhotos] = useState<Photo[]>([]); // Sử dụng kiểu Photo[]
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
 
+  //   useEffect(() => {
+  //     const loadPhotos = async () => {
+  //       setLoading(true);
+  //       const newPhotos: Photo[] = await fetchPhotos(page);
+  //       if (newPhotos.length === 0) setHasMore(false);
+  //       setPhotos((prev) => [...prev, ...newPhotos]);
+  //       setLoading(false);
+  //     };
+  //     loadPhotos();
+  //   }, [page]);
+
   useEffect(() => {
     const loadPhotos = async () => {
       setLoading(true);
-      const newPhotos = await fetchPhotos(page);
-      if (newPhotos.length === 0) setHasMore(false);
-      setPhotos((prev) => [...prev, ...newPhotos]);
-      setLoading(false);
+      try {
+        const newPhotos: Photo[] = await fetchPhotos(page);
+        if (newPhotos.length === 0) setHasMore(false);
+        setPhotos((prev) => [...prev, ...newPhotos]);
+      } catch (error) {
+        console.error("Error fetching photo list:", error); // Log lỗi ra console
+      } finally {
+        setLoading(false);
+      }
     };
     loadPhotos();
   }, [page]);
