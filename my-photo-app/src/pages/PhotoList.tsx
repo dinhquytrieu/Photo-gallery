@@ -55,15 +55,21 @@ const PhotoList: React.FC = () => {
   }, [loading]);
 
   return (
-    <div className="photo-grid">
-      {photos.map((photo) => (
-        <Link to={`/photos/${photo.id}`} key={photo.id} className="photo-item">
-          <img src={photo.urls.thumb} alt={photo.alt_description || "Photo"} />
-          <p>{photo.user.name}</p>
-        </Link>
-      ))}
-      {loading && <div>Loading...</div>}
-      {!hasMore && <div>No more photos</div>}
+    <div className="container mx-auto p-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+        {photos.map((photo) => (
+          <Link to={`/photos/${photo.id}`} key={photo.id} className="block">
+            <img
+              src={photo.urls.thumb}
+              alt={photo.alt_description || "Photo"}
+              className="w-full h-48 object-cover rounded"
+            />
+            <p className="text-center mt-2 text-sm">{photo.user.name}</p>
+          </Link>
+        ))}
+      </div>
+      {loading && <div className="text-center mt-4">Loading...</div>}
+      {!hasMore && <div className="text-center mt-4">No more photos</div>}
     </div>
   );
 };
