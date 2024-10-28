@@ -62,7 +62,7 @@ const PhotoList: React.FC = () => {
             <img
               src={photo.urls.thumb}
               alt={photo.alt_description || "Photo"}
-              className="w-full h-48 object-cover rounded"
+              className="w-full h-auto object-contain rounded" // Sử dụng h-auto
             />
             <p className="text-center mt-2 text-sm">{photo.user.name}</p>
           </Link>
