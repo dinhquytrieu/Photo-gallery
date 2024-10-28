@@ -56,13 +56,17 @@ const PhotoList: React.FC = () => {
 
   return (
     <div className="container mx-auto p-4">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4">
         {photos.map((photo) => (
-          <Link to={`/photos/${photo.id}`} key={photo.id} className="block">
+          <Link
+            to={`/photos/${photo.id}`}
+            key={photo.id}
+            className="block mb-4"
+          >
             <img
               src={photo.urls.thumb}
               alt={photo.alt_description || "Photo"}
-              className="w-full h-auto object-contain rounded" // Sử dụng h-auto
+              className="w-full h-auto object-contain rounded"
             />
             <p className="text-center mt-2 text-sm">{photo.user.name}</p>
           </Link>
