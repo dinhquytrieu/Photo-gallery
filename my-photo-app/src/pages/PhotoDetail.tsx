@@ -46,31 +46,32 @@ const PhotoDetail: React.FC = () => {
         onClick={() => navigate(-1)}
         className="bg-blue-500 text-white py-2 px-4 rounded-lg mb-6 hover:bg-blue-600 transition"
       >
-        Back to Photos
+        ← Back to Gallery
       </button>
 
-      {/* Hình ảnh */}
-      <div className="w-full mb-6">
+      {/* Thẻ ảnh (Card) */}
+      <div className="max-w-md mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
+        {/* Hình ảnh */}
         <img
           src={photo.urls.full}
           alt={photo.alt_description || "Photo"}
-          className="w-full h-auto rounded-lg shadow-lg"
+          className="w-full h-auto"
         />
-      </div>
 
-      {/* Thông tin ảnh */}
-      <div className="text-center">
-        <h1 className="text-2xl font-bold mb-4 text-gray-800">
-          {photo.alt_description || "No Title Available"}
-        </h1>
+        {/* Thông tin ảnh */}
+        <div className="p-4">
+          <h1 className="text-xl font-bold mb-2 text-gray-800">
+            {photo.alt_description || "No Title Available"}
+          </h1>
 
-        <p className="text-lg text-gray-600 mb-4">
-          <span className="font-semibold">Author:</span> {photo.user.name}
-        </p>
+          <p className="text-sm text-gray-600 mb-2">
+            <span className="font-semibold">Author:</span> {photo.user.name}
+          </p>
 
-        <p className="text-base text-gray-500">
-          {photo.description || "No Description Available"}
-        </p>
+          <p className="text-sm text-gray-500">
+            {photo.description || "No Description Available"}
+          </p>
+        </div>
       </div>
     </div>
   );
