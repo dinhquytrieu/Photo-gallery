@@ -61,14 +61,20 @@ const PhotoList: React.FC = () => {
           <Link
             to={`/photos/${photo.id}`}
             key={photo.id}
-            className="block mb-4"
+            className="relative block mb-4"
           >
-            <img
-              src={photo.urls.thumb}
-              alt={photo.alt_description || "Photo"}
-              className="w-full h-auto object-contain rounded"
-            />
-            <p className="text-center mt-2 text-sm">{photo.user.name}</p>
+            {/* Div bọc ngoài để chứa cả ảnh và tên */}
+            <div className="relative">
+              <img
+                src={photo.urls.thumb}
+                alt={photo.alt_description || "Photo"}
+                className="w-full h-auto object-contain rounded"
+              />
+              {/* Thêm overlay tên người dùng */}
+              <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white text-center p-2">
+                {photo.user.name}
+              </div>
+            </div>
           </Link>
         ))}
       </div>
