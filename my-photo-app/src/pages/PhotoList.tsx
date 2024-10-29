@@ -82,8 +82,13 @@ const PhotoList: React.FC = () => {
                 alt={photo.alt_description || "Photo"}
                 className="w-full h-auto object-cover transform transition-transform duration-300 hover:scale-110 rounded-lg"
               />
-              <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white text-center p-2">
-                {photo.user.name}
+              <div className="absolute bottom-0 left-0 right-0 p-2 text-white bg-black bg-opacity-40 flex items-center justify-center">
+                <img
+                  src={photo.user.profile_image.small}
+                  alt={photo.user.name}
+                  className="h-8 w-8 rounded-full mr-2"
+                />
+                <p className="text-sm font-medium">{photo.user.name}</p>
               </div>
             </div>
           </Link>

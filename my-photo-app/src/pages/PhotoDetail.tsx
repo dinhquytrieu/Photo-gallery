@@ -64,13 +64,27 @@ const PhotoDetail: React.FC = () => {
             {photo.alt_description || "No Title Available"}
           </h1>
 
-          <p className="text-sm text-gray-600 mb-2">
-            <span className="font-semibold">Author:</span> {photo.user.name}
+          <p className="text-gray-500 text-sm mb-4 flex items-center">
+            <img
+              src={photo.user.profile_image.small}
+              alt={photo.user.name}
+              className="h-8 w-8 rounded-full mr-2" // Avatar styling
+            />
+            <span className="font-medium">By {photo.user.name}</span>
           </p>
 
           <p className="text-sm text-gray-500">
             {photo.description || "No Description Available"}
           </p>
+        </div>
+
+        <div className="flex justify-center p-4">
+          <button
+            className="px-5 py-2 bg-indigo-500 text-white rounded-lg shadow-md hover:bg-indigo-600 transition duration-300"
+            onClick={() => window.open(photo.urls.full, "_blank")}
+          >
+            Full Image
+          </button>
         </div>
       </div>
     </div>

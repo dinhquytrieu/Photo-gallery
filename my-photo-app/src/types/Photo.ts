@@ -5,9 +5,7 @@ export interface Photo {
     thumb: string;
     full: string;
   };
-  user: {
-    name: string;
-  };
+  user: { name: string; profile_image: { small: string } };
   alt_description: string | null;
   description: string | null;
 }
