@@ -1,6 +1,7 @@
 // src/pages/PhotoList.tsx
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import Masonry from "react-masonry-css"; // Import thư viện Masonry
 import { fetchPhotos } from "../api/unsplash";
 import { Photo } from "../types/Photo"; // Import kiểu dữ liệu Photo
 
@@ -54,30 +55,40 @@ const PhotoList: React.FC = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [loading]);
 
+  // Cấu hình breakpoints cho Masonry
+  const breakpointColumnsObj = {
+    default: 4, // Số cột mặc định
+    1100: 3, // 3 cột nếu chiều rộng dưới 1100px
+    700: 2, // 2 cột nếu chiều rộng dưới 700px
+    500: 1, // 1 cột nếu chiều rộng dưới 500px
+  };
+
   return (
     <div className="container mx-auto p-4">
-      <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4">
+      <Masonry
+        breakpointCols={breakpointColumnsObj} // Responsive column configuration for the layout
+        className="flex w-auto gap-x-4 gap-y-4"
+        columnClassName="masonry-grid-column"
+      >
         {photos.map((photo) => (
           <Link
             to={`/photos/${photo.id}`}
             key={photo.id}
             className="relative block mb-4"
           >
-            {/* Div bọc ngoài để chứa cả ảnh và tên */}
-            <div className="relative">
+            <div className="relative overflow-hidden rounded">
               <img
                 src={photo.urls.thumb}
                 alt={photo.alt_description || "Photo"}
-                className="w-full h-auto object-contain rounded"
+                className="w-full h-auto object-cover transform transition-transform duration-300 hover:scale-110"
               />
-              {/* Thêm overlay tên người dùng */}
               <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white text-center p-2">
                 {photo.user.name}
               </div>
             </div>
           </Link>
         ))}
-      </div>
+      </Masonry>
       {loading && <div className="text-center mt-4">Loading...</div>}
       {!hasMore && <div className="text-center mt-4">No more photos</div>}
     </div>

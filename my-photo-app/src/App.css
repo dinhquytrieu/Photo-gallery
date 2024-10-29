@@ -1,0 +1,15 @@
+/* CSS cho Masonry grid */
+.my-masonry-grid {
+  display: flex;
+  margin-left: -30px; /* Khoảng cách giữa các cột */
+  width: auto;
+}
+.my-masonry-grid_column {
+  padding-left: 30px; /* Khoảng cách giữa các cột */
+  background-clip: padding-box;
+}
+
+/* Khoảng cách giữa các item */
+.my-masonry-grid_column > div {
+  margin-bottom: 30px;
+}
